@@ -1,12 +1,12 @@
+import useOrder from './hooks/useOrder';
+import { menuItems } from './data/db';
 import MenuItem from './Components/MenuItem';
 import OrderContentes from './Components/OrderContentes';
-import { menuItems } from './data/db';
-import useOrder from './hooks/useOrder';
-
-
+import OrderTotals from './Components/OrderTotals';
+import TipPorcentageFrom from './Components/TipPorcentageFrom';
 
 const App = () => {
-  const { order, addItem, deletItem } = useOrder();
+  const { order, addItem, deletItem, setTip, tip, placeOrder } = useOrder();
   return (
     <>
       <header className="bg-teal-400 py-5">
@@ -25,11 +25,30 @@ const App = () => {
             ))}
           </div>
         </div>
+
+
         <div className="border border-dashed border-slate-300 p-5 rounded-lg space-y-10">
-          <OrderContentes
-            order={order}
-            deletItem={deletItem}
-          />
+
+          {order.length > 0 ? (
+            <>
+              <OrderContentes
+                order={order}
+                deletItem={deletItem}
+              />
+              <TipPorcentageFrom
+                tip={tip}
+                setTip={setTip}
+              />
+              <OrderTotals
+                order={order}
+                tip={tip}
+                placeOrder={placeOrder}
+              />
+            </>
+          ) : (
+            <p className="text-center">La orden esta vacia</p>
+          )}
+
         </div>
       </main>
     </>

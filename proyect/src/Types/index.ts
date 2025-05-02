@@ -17,3 +17,14 @@ export type OrderContenteProps = {
     order: OrderItem[],
     deletItem: (item: MenuItem['id']) => void
 }
+
+export type TipPorcentageFromProps = {
+    setTip: React.Dispatch<React.SetStateAction<number>>,
+    tip: number
+}
+
+export type OrderTotalsPros = {
+    order: OrderItem[],
+    tip: number,
+    placeOrder: () => void
+}
